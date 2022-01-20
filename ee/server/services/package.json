@@ -39,7 +39,7 @@
 		"moleculer": "^0.14.14",
 		"mongodb": "^3.6.10",
 		"nats": "^1.4.12",
-		"pino": "^7.5.1",
+		"pino": "^7.6.3",
 		"sodium-native": "^3.2.1",
 		"sodium-plus": "^0.9.0",
 		"underscore.string": "^3.3.5",
