@@ -614,17 +614,12 @@ Meteor.startup(() => {
 				}
 			}
 			const newMessage = document.getElementsByClassName('new-message')[0];
-			if(newMessage.classList.contains('not')){
-				const top=document.getElementsByClassName('scroll-down')[0];
-				const {scrollHeight,scrollTop,clientHeight}=e.target;
-				if(Math.ceil(scrollTop)<(scrollHeight-clientHeight))
-					top.style.display='block';
-				else
-					top.style.display='none';
-					
+			if (newMessage.classList.contains('not')) {
+				const top = document.getElementsByClassName('scroll-down')[0];
+				const { scrollHeight, scrollTop, clientHeight } = e.target;
+				if (Math.ceil(scrollTop) < scrollHeight - clientHeight) top.style.display = 'block';
+				else top.style.display = 'none';
 			}
-			
-
 		}, 100),
 
 		'click .time a'(e) {
@@ -636,13 +631,12 @@ Meteor.startup(() => {
 				hash: Random.id(),
 			});
 		},
-		'click .scroll-down'(e){
-			const wrapperObj=document.getElementsByClassName('wrapper')[0];
-			wrapperObj.style.scrollBehavior='smooth';
-			const {scrollHeight,scrollTop,clientHeight}=wrapperObj;
-			wrapperObj.scrollTop=scrollHeight-clientHeight;
-		
-		}
+		'click .scroll-down'() {
+			const wrapperObj = document.getElementsByClassName('wrapper')[0];
+			wrapperObj.style.scrollBehavior = 'smooth';
+			const { scrollHeight, clientHeight } = wrapperObj;
+			wrapperObj.scrollTop = scrollHeight - clientHeight;
+		},
 	});
 
 	Template.roomOld.onCreated(function () {
@@ -836,8 +830,8 @@ Meteor.startup(() => {
 
 		const store = NewRoomManager.getStore(rid);
 
-		const scrollDownObj=document.getElementsByClassName('scroll-down')[0];
-		scrollDownObj.style.display='none';
+		const scrollDownObj = document.getElementsByClassName('scroll-down')[0];
+		scrollDownObj.style.display = 'none';
 
 		const afterMessageGroup = () => {
 			if (store.scroll && !store.atBottom) {
@@ -1043,9 +1037,8 @@ Meteor.startup(() => {
 					return template.sendToBottom();
 				}
 
-				const scrollDown=document.getElementsByClassName('scroll-down')[0];
-				if(scrollDown)
-					scrollDown.style.display='none';
+				const scrollDown = document.getElementsByClassName('scroll-down')[0];
+				if (scrollDown) scrollDown.style.display = 'none';
 
 				if (!template.isAtBottom()) {
 					newMessage.classList.remove('not');
