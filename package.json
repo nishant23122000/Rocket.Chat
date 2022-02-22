@@ -317,7 +317,7 @@
 		"universal-perf-hooks": "^1.0.1",
 		"url-polyfill": "^1.1.12",
 		"use-subscription": "^1.5.1",
-		"uuid": "^3.4.0",
+		"uuid": "^8.3.2",
 		"webdav": "^2.10.2",
 		"xml-crypto": "^2.1.3",
 		"xml-encryption": "0.11.2",
