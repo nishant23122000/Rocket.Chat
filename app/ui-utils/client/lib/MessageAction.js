@@ -8,7 +8,6 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import { Tracker } from 'meteor/tracker';
 import { Session } from 'meteor/session';
 
-
 import { messageArgs } from './messageArgs';
 import { roomCoordinator } from '../../../../client/lib/rooms/roomCoordinator';
 import { Messages, Rooms, Subscriptions } from '../../../models/client';
@@ -19,7 +18,7 @@ import ReactionList from '../../../../client/views/room/modals/ReactionListModal
 import { call } from '../../../../client/lib/utils/call';
 import { canDeleteMessage } from '../../../../client/lib/utils/canDeleteMessage';
 import { dispatchToastMessage } from '../../../../client/lib/toast';
-import ShareMessageModal from '/client/views/room/modals/ShareMessageModal';
+import ShareMessageModal from '../../../../client/views/room/modals/ShareMessageModal';
 
 export const addMessageToList = (messagesList, message) => {
 	// checks if the message is not already on the list
@@ -30,8 +29,7 @@ export const addMessageToList = (messagesList, message) => {
 	return messagesList;
 };
 
-export const MessageAction = new (
-	class {
+export const MessageAction = new (class {
 	/*
   	config expects the following keys (only id is mandatory):
   		id (mandatory)
@@ -203,33 +201,33 @@ Meteor.startup(async function () {
 			imperativeModal.open({
 				component: ShareMessageModal,
 				props: {
-					message:msg.msg,
-					username:msg.u.username,
-					time:msg.ts,
-				// 	file: file.file,
-				// 	fileName: file.name,
-				// 	fileDescription: messageBoxText,
+					message: msg.msg,
+					username: msg.u.username,
+					time: msg.ts,
+					// 	file: file.file,
+					// 	fileName: file.name,
+					// 	fileDescription: messageBoxText,
 					onClose: () => {
 						imperativeModal.close();
 						// uploadNextFile();
 					},
-				// 	onSubmit: (fileName, description) => {
-				// 		uploadFileWithMessage(rid, tmid, {
-				// 			description,
-				// 			fileName,
-				// 			msg: msg || undefined,
-				// 			file,
-				// 		});
-				// 		const localStorageKey = ['messagebox', rid, tmid].filter(Boolean).join('_');
-				// 		const chatMessageKey = [rid, tmid].filter(Boolean).join('-');
-				// 		const { input } = chatMessages[chatMessageKey];
-				// 		input.value = null;
-				// 		$(input).trigger('input');
-				// 		Meteor._localStorage.removeItem(localStorageKey);
-				// 		imperativeModal.close();
-				// 		uploadNextFile();
+					// 	onSubmit: (fileName, description) => {
+					// 		uploadFileWithMessage(rid, tmid, {
+					// 			description,
+					// 			fileName,
+					// 			msg: msg || undefined,
+					// 			file,
+					// 		});
+					// 		const localStorageKey = ['messagebox', rid, tmid].filter(Boolean).join('_');
+					// 		const chatMessageKey = [rid, tmid].filter(Boolean).join('-');
+					// 		const { input } = chatMessages[chatMessageKey];
+					// 		input.value = null;
+					// 		$(input).trigger('input');
+					// 		Meteor._localStorage.removeItem(localStorageKey);
+					// 		imperativeModal.close();
+					// 		uploadNextFile();
 					// },
-				// 	invalidContentType: file.file.type && !fileUploadIsValidContentType(file.file.type),
+					// 	invalidContentType: file.file.type && !fileUploadIsValidContentType(file.file.type),
 				},
 			});
 		},
@@ -247,7 +245,7 @@ Meteor.startup(async function () {
 				if (!dmRoom || !Subscriptions.findOne({ 'rid': dmRoom._id, 'u._id': u._id })) {
 					return false;
 				}
-			} 
+			}
 
 			return true;
 		},

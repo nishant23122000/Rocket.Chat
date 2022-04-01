@@ -1,13 +1,12 @@
-import { Modal, Box, Field, FieldGroup, TextInput, ButtonGroup, Button, TextAreaInput } from '@rocket.chat/fuselage';
-import { useAutoFocus, useMutableCallback } from '@rocket.chat/fuselage-hooks';
+import { Modal, Box, Field, FieldGroup, ButtonGroup, Button, TextAreaInput, Message } from '@rocket.chat/fuselage';
 import React, { ReactElement, memo } from 'react';
-import { Message } from '@rocket.chat/fuselage';
+
+import UserAutoCompleteMultiple from '../../../../components/UserAutoCompleteMultiple';
 import UserAvatar from '../../../../components/avatar/UserAvatar';
-import { useToastMessageDispatch } from '../../../../contexts/ToastMessagesContext';
 import { useTranslation } from '../../../../contexts/TranslationContext';
-import { formatTime } from '../../../../lib/utils/formatTime';
 import { useForm } from '../../../../hooks/useForm';
-import UserAutoCompleteMultiple from '/client/components/UserAutoCompleteMultiple';
+import { formatTime } from '../../../../lib/utils/formatTime';
+
 type ShareMessageProps = {
 	onClose: () => void;
 	onSubmit: (name: string, description?: string) => void;
@@ -17,28 +16,20 @@ type ShareMessageProps = {
 	invalidContentType: boolean;
 };
 
-const ShareMessageModal = ({ onClose, message, username, time, onSubmit, invalidContentType }: ShareMessageProps): ReactElement => {
+const ShareMessageModal = ({ onClose, message, username, time }: ShareMessageProps): ReactElement => {
 	// const [name, setName] = useState<string>(fileName);
 	// const [description, setDescription] = useState<string>(fileDescription || '');
 	const t = useTranslation();
-	const { values, handlers } = useForm({
+	const { handlers } = useForm({
 		description: 'fj',
 		usernames: [],
 	});
 
-	const { description, usernames } = values;
-	const { handleDescription, handleUsernames } = handlers;
-	const dispatchToastMessage = useToastMessageDispatch();
+	const { handleDescription } = handlers;
 
-	const ref = useAutoFocus<HTMLInputElement>();
-	const onChangeUsers = useMutableCallback((value, action) => {});
-	const shareMessage = (e: any) => {
-		e.preventDefault();
-		console.log(values);
-	};
 	return (
 		<Modal>
-			<Box is='form' display='flex' flexDirection='column' height='100%' onSubmit={() => {}}>
+			<Box is='form' display='flex' flexDirection='column' height='100%'>
 				<Modal.Header>
 					<Modal.Title>{t('Share_Message_Title')}</Modal.Title>
 					<Modal.Close onClick={onClose} />
@@ -49,7 +40,7 @@ const ShareMessageModal = ({ onClose, message, username, time, onSubmit, invalid
 							<Field.Label>{t('Person_Or_Channel')}</Field.Label>
 
 							<Field.Row>
-								<UserAutoCompleteMultiple onChange={onChangeUsers} value={usernames} />
+								<UserAutoCompleteMultiple />
 							</Field.Row>
 							{/* {!name && <Field.Error>{t('error-the-field-is-required', { field: t('Name') })}</Field.Error>} */}
 						</Field>
@@ -84,10 +75,8 @@ const ShareMessageModal = ({ onClose, message, username, time, onSubmit, invalid
 				</Modal.Content>
 				<Modal.Footer>
 					<ButtonGroup align='end'>
-						<Button ghost onClick={() => {}}>
-							{t('Copy_Link')}
-						</Button>
-						<Button onClick={shareMessage} primary type='submit'>
+						<Button ghost>{t('Copy_Link')}</Button>
+						<Button primary type='submit'>
 							{t('Share_message')}
 						</Button>
 					</ButtonGroup>
