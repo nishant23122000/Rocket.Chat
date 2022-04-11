@@ -3,7 +3,7 @@
 		"module": "CommonJS",
 		"target": "es2018",
 		"lib": ["esnext", "dom"],
-
+ 
 		"allowJs": true,
 		"checkJs": false,
 		"jsx": "react",
