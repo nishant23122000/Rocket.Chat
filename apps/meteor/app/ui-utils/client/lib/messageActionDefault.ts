@@ -5,6 +5,7 @@ import { TAPi18n } from 'meteor/rocketchat:tap-i18n';
 import { Session } from 'meteor/session';
 import { IMessage } from '@rocket.chat/core-typings';
 
+import ShareMessageModal from '../../../../client/views/room/modals/ShareMessageModal';
 import { messageArgs } from '../../../../client/lib/utils/messageArgs';
 import { roomCoordinator } from '../../../../client/lib/rooms/roomCoordinator';
 import { Rooms, Subscriptions } from '../../../models/client';
@@ -73,7 +74,37 @@ Meteor.startup(async function () {
 		order: 0,
 		group: 'menu',
 	});
-
+	MessageAction.addButton({
+		id: 'share-message',
+		icon: 'share-message',
+		label: 'Share_message',
+		context: ['message', 'message-mobile', 'threads'],
+		action() {
+			const { msg } = messageArgs(this);
+			imperativeModal.open({
+				component: ShareMessageModal,
+				props: {
+					message: msg.msg,
+					username: msg.u.username,
+					time: msg.ts,
+					// 	file: file.file,
+					// 	fileName: file.name,
+					// 	fileDescription: messageBoxText,
+					onClose: () => {
+						imperativeModal.close();
+					},
+					// 	onSubmit: (fileName, description) => {
+					// },
+					// 	invalidContentType: file.file.type && !fileUploadIsValidContentType(file.file.type),
+				},
+			});
+		},
+		condition() {
+			return true;
+		},
+		order: 0,
+		group: ['message', 'menu'],
+	});
 	MessageAction.addButton({
 		id: 'quote-message',
 		icon: 'quote',
