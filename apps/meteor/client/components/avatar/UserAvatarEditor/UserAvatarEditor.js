@@ -13,6 +13,8 @@ function UserAvatarEditor({ currentUsername, username, setAvatarObj, suggestions
 	const [newAvatarSource, setNewAvatarSource] = useState();
 	const [urlEmpty, setUrlEmpty] = useState(true);
 	const dispatchToastMessage = useToastMessageDispatch();
+	const a = "nishant";
+	console.log(nishant);
 	const toDataURL = (file, callback) => {
 		const reader = new FileReader();
 		reader.onload = function (e) {
